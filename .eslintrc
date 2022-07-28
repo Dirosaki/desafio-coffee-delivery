@@ -1,0 +1,3 @@
+{
+	"extends": ["van-gogh", "van-gogh/import", "van-gogh/prettier"]
+}
