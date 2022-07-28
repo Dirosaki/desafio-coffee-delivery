@@ -1062,10 +1062,10 @@ eslint-config-prettier@^8.5.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
-eslint-config-van-gogh@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-van-gogh/-/eslint-config-van-gogh-1.0.0.tgz#f8e5f331d392e5a40c85554da39c4a37935c942b"
-  integrity sha512-ys/7uRsiEol7o9FxpT8V7izzcFWAOyxvFY5oVblKc9PhlO14ncaMc6BuE60exvklj6kCqK3esczS0unf67vgOw==
+eslint-config-van-gogh@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-van-gogh/-/eslint-config-van-gogh-1.0.1.tgz#4c385adecf90bfa023a8046156eb9d8502554c2a"
+  integrity sha512-xh20J7CNdbfaI5AG/rJqEshJuqfhongMbxXklWXaP5xDsdBppwpx+/isowlaNTGAxPD1DpvoUEr31dSaewgOtg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.31.0"
     "@typescript-eslint/parser" "^5.31.0"
