@@ -7,9 +7,19 @@ export const CartButton = styled(Link)`
 		padding: 8px;
 		position: relative;
 		background: ${theme.colors.brand.yellowLight};
+		border: 1px solid transparent;
 		border-radius: 6px;
 		line-height: 0;
 		color: ${theme.colors.brand.yellowDark};
+		transition: box-shadow 0.2s ease-out;
+
+		&:hover {
+			box-shadow: 0 0 0 1px ${theme.colors.brand.yellowDark};
+		}
+
+		&:focus-visible {
+			box-shadow: 0 0 0 2px ${theme.colors.brand.yellowDark};
+		}
 	`}
 `
 

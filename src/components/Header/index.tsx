@@ -11,19 +11,21 @@ import * as Styled from './styles'
 export function Header() {
 	return (
 		<Styled.Header>
-			<Link to="/">
-				<img
-					src={logoImg}
-					alt="Copo de café roxo com um foguete dentro e ao lado escrito 'Coffe Delivery'"
-				/>
-			</Link>
-			<Styled.ActionsWrapper>
-				<Styled.MyLocation>
-					<MapPin size={22} weight="fill" />
-					<span>Porto Alegre, RS</span>
-				</Styled.MyLocation>
-				<CartButton />
-			</Styled.ActionsWrapper>
+			<div>
+				<Link to="/" tabIndex={-1}>
+					<img
+						src={logoImg}
+						alt="Copo de café roxo com um foguete dentro e ao lado escrito 'Coffe Delivery'"
+					/>
+				</Link>
+				<Styled.ActionsWrapper>
+					<Styled.MyLocation type="button">
+						<MapPin size={22} weight="fill" />
+						<span>Porto Alegre, RS</span>
+					</Styled.MyLocation>
+					<CartButton />
+				</Styled.ActionsWrapper>
+			</div>
 		</Styled.Header>
 	)
 }
