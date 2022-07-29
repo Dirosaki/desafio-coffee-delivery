@@ -1,3 +1,12 @@
 {
-	"extends": ["van-gogh", "van-gogh/import", "van-gogh/prettier"]
+	"extends": ["van-gogh", "van-gogh/import", "van-gogh/prettier"],
+	"rules": {
+		"react/jsx-no-bind": ["error", {
+			"ignoreDOMComponents": false,
+			"ignoreRefs": false,
+			"allowArrowFunctions": false,
+			"allowFunctions": true,
+			"allowBind": false
+		}]
+	}
 }
