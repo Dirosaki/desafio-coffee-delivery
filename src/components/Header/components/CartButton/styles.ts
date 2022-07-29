@@ -1,17 +1,12 @@
-import { Link } from 'react-router-dom'
-
 import styled, { css } from 'styled-components'
 
-export const CartButton = styled(Link)`
+import { BaseCartButton } from 'components/CartButton'
+
+export const CartButton = styled(BaseCartButton)`
 	${({ theme }) => css`
-		padding: 8px;
-		position: relative;
 		background: ${theme.colors.brand.yellowLight};
-		border: 1px solid transparent;
-		border-radius: 6px;
-		line-height: 0;
 		color: ${theme.colors.brand.yellowDark};
-		transition: box-shadow 0.2s ease-out;
+		transition: all 0.2s ease-out;
 
 		&:hover {
 			box-shadow: 0 0 0 1px ${theme.colors.brand.yellowDark};

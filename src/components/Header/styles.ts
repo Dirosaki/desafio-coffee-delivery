@@ -26,6 +26,7 @@ export const Header = styled.header`
 export const ActionsWrapper = styled.div`
 	position: relative;
 	display: flex;
+	align-items: center;
 	gap: 12px;
 `
 
