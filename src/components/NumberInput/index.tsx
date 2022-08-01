@@ -4,6 +4,9 @@ import { Minus, Plus } from 'phosphor-react'
 
 import * as Styled from './styles'
 
+const MIN = 1
+const MAX = 99
+
 type HandleKeys = Record<string, () => void>
 
 type NumberInputProps = {
@@ -22,8 +25,8 @@ export function NumberInput({
 	const handleKeys: HandleKeys = {
 		ArrowUp: () => onIncreaseQuantityCoffee(),
 		ArrowDown: () => onDecreaseQuantityCoffee(),
-		Home: () => onQuantityCoffeeReceived(99),
-		End: () => onQuantityCoffeeReceived(1),
+		Home: () => onQuantityCoffeeReceived(MAX),
+		End: () => onQuantityCoffeeReceived(MIN),
 	}
 
 	function handleChangeCount(event: ChangeEvent<HTMLInputElement>) {
@@ -43,10 +46,17 @@ export function NumberInput({
 		}
 	}
 
+	function handleInvalidQuantity() {
+		if (quantityCoffee === 0) {
+			onQuantityCoffeeReceived(MIN)
+		}
+	}
+
 	return (
 		<Styled.NumberInputContainer>
 			<Styled.SpinButton
 				type="button"
+				disabled={quantityCoffee === MIN}
 				aria-label="Diminuir quantidade"
 				onClick={onDecreaseQuantityCoffee}
 				tabIndex={-1}
@@ -67,10 +77,12 @@ export function NumberInput({
 				inputMode="decimal"
 				pattern="[0-9]"
 				autoComplete="off"
+				onBlur={handleInvalidQuantity}
 				aria-label="Quantidade de café"
 			/>
 			<Styled.SpinButton
 				type="button"
+				disabled={quantityCoffee === MAX}
 				aria-label="Aumentar quantidade"
 				onClick={onIncreaseQuantityCoffee}
 				tabIndex={-1}
