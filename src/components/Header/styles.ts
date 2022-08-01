@@ -38,7 +38,7 @@ export const MyLocation = styled.button`
 		justify-content: center;
 		gap: 4px;
 		background: ${theme.colors.brand.purpleLight};
-		border: 1px solid transparent;
+		border: none;
 		border-radius: 6px;
 		color: ${theme.colors.brand.purple};
 		transition: box-shadow 0.2s ease-out;
