@@ -2,19 +2,22 @@ import { useState } from 'react'
 
 import { ShoppingCart } from 'phosphor-react'
 
+import { useCart } from 'hooks/useCart'
+
 import { NumberInput } from 'components/NumberInput'
 
 import { formatPrice } from 'utils/formatPrice'
 
 import * as Styled from './styles'
 
-type CoffeeProps = {
+export type CoffeeProps = {
 	id: string
 	img: string
 	labels: string[]
 	name: string
 	description: string
 	price: number
+	quantity: number
 }
 
 type CoffeeCardProps = {
@@ -23,6 +26,8 @@ type CoffeeCardProps = {
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
 	const [quantityCoffee, setQuantityCoffee] = useState(1)
+
+	const { addCoffeeToCart } = useCart()
 
 	function handleIncreaseQuantityCoffee() {
 		if (quantityCoffee === 99) return
@@ -36,6 +41,10 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
 	function handleQuantityCoffeeReceived(quantity: number) {
 		setQuantityCoffee(quantity)
+	}
+
+	function handleAddCoffeeToCart() {
+		addCoffeeToCart({ ...coffee, quantity: quantityCoffee })
 	}
 
 	const formattedPrice = formatPrice(coffee.price)
@@ -64,7 +73,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 						onDecreaseQuantityCoffee={handleDecreaseQuantityCoffee}
 						onQuantityCoffeeReceived={handleQuantityCoffeeReceived}
 					/>
-					<Styled.CartButton type="button" as="button">
+					<Styled.CartButton
+						type="button"
+						as="button"
+						onClick={handleAddCoffeeToCart}
+					>
 						<ShoppingCart size={20} weight="fill" />
 					</Styled.CartButton>
 				</Styled.ActionWrapper>
