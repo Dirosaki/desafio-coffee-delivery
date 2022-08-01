@@ -1,9 +1,26 @@
-import { createContext, ReactNode, useCallback, useMemo, useState } from 'react'
+import {
+	createContext,
+	ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useReducer,
+} from 'react'
+
+import {
+	addCoffeeToCartAction,
+	removeCoffeeFromCartAction,
+	increaseQuantityCoffeeAction,
+	decreaseQuantityCoffeeAction,
+	changeQuantityCoffeeAction,
+	clearCartAction,
+} from 'reducers/coffees/actions'
+import { coffeesReducer } from 'reducers/coffees/reducer'
 
 import { CoffeeProps } from 'pages/Home/components/CoffeeCard'
 
 type CartContextType = {
-	cartItems: CoffeeProps[]
+	coffees: CoffeeProps[]
 	totalPrice: number
 	quantityItems: number
 	addCoffeeToCart: (coffee: CoffeeProps) => void
@@ -11,96 +28,76 @@ type CartContextType = {
 	changeItemQuantityById: (itemId: string, newValue: number) => void
 	increaseItemQuantityById: (itemId: string) => void
 	decreaseItemQuantityById: (itemId: string) => void
+	clearCart: () => void
 }
 
 type CartContextProviderProps = { children: ReactNode }
 
 export const CartContext = createContext({} as CartContextType)
 
-export function CartContextProvider({ children }: CartContextProviderProps) {
-	const [cartItems, setCartItems] = useState<CoffeeProps[]>([])
+const initialState = [] as CoffeeProps[]
 
-	const totalPrice = cartItems.reduce((total, item) => {
+const STORAGENAME = '@coffee-delivery:coffees-1.0.0'
+
+function getStoredState() {
+	const storedStateAsJSON = localStorage.getItem(STORAGENAME)
+
+	if (storedStateAsJSON) {
+		return JSON.parse(storedStateAsJSON)
+	}
+
+	return []
+}
+
+export function CartContextProvider({ children }: CartContextProviderProps) {
+	const [coffees, dispatch] = useReducer(
+		coffeesReducer,
+		initialState,
+		getStoredState
+	)
+
+	useEffect(() => {
+		const stateJSON = JSON.stringify(coffees)
+
+		localStorage.setItem(STORAGENAME, stateJSON)
+	}, [coffees])
+
+	const totalPrice = coffees.reduce((total, item) => {
 		return total + item.price * item.quantity
 	}, 0)
 
-	const quantityItems = cartItems.length
+	const quantityItems = coffees.length
 
-	const addCoffeeToCart = useCallback(
-		(coffee: CoffeeProps) => {
-			const findex = cartItems.find((item) => item.id === coffee.id)
+	const addCoffeeToCart = useCallback((coffee: CoffeeProps) => {
+		dispatch(addCoffeeToCartAction(coffee))
+	}, [])
 
-			if (findex) {
-				const newItem = cartItems.map((item) => {
-					if (item.id === coffee.id) {
-						return { ...item, quantity: item.quantity + coffee.quantity }
-					}
-					return item
-				})
-				setCartItems(newItem)
-			} else {
-				setCartItems([...cartItems, coffee])
-			}
-		},
-		[cartItems]
-	)
+	const removeItemById = useCallback((itemId: string) => {
+		dispatch(removeCoffeeFromCartAction(itemId))
+	}, [])
 
-	const removeItemById = useCallback(
-		(itemId: string) => {
-			const cartItemsWithoutDeletedOne = cartItems.filter(
-				(item) => item.id !== itemId
-			)
+	const increaseItemQuantityById = useCallback((itemId: string) => {
+		dispatch(increaseQuantityCoffeeAction(itemId))
+	}, [])
 
-			setCartItems(cartItemsWithoutDeletedOne)
-		},
-		[cartItems]
-	)
-
-	const increaseItemQuantityById = useCallback(
-		(itemId: string) => {
-			const newItem = cartItems.map((item) => {
-				if (item.id === itemId) {
-					return { ...item, quantity: item.quantity + 1 }
-				}
-				return item
-			})
-
-			setCartItems(newItem)
-		},
-		[cartItems]
-	)
-
-	const decreaseItemQuantityById = useCallback(
-		(itemId: string) => {
-			const newItem = cartItems.map((item) => {
-				if (item.id === itemId) {
-					return { ...item, quantity: item.quantity - 1 }
-				}
-				return item
-			})
-
-			setCartItems(newItem)
-		},
-		[cartItems]
-	)
+	const decreaseItemQuantityById = useCallback((itemId: string) => {
+		dispatch(decreaseQuantityCoffeeAction(itemId))
+	}, [])
 
 	const changeItemQuantityById = useCallback(
 		(itemId: string, newValue: number) => {
-			const newItem = cartItems.map((item) => {
-				if (item.id === itemId) {
-					return { ...item, quantity: newValue }
-				}
-				return item
-			})
-
-			setCartItems(newItem)
+			dispatch(changeQuantityCoffeeAction(itemId, newValue))
 		},
-		[cartItems]
+		[]
 	)
+
+	const clearCart = useCallback(() => {
+		dispatch(clearCartAction())
+	}, [])
 
 	const values = useMemo(
 		() => ({
-			cartItems,
+			coffees,
 			totalPrice,
 			quantityItems,
 			addCoffeeToCart,
@@ -108,9 +105,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 			increaseItemQuantityById,
 			decreaseItemQuantityById,
 			changeItemQuantityById,
+			clearCart,
 		}),
 		[
-			cartItems,
+			coffees,
 			totalPrice,
 			quantityItems,
 			addCoffeeToCart,
@@ -118,6 +116,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 			increaseItemQuantityById,
 			decreaseItemQuantityById,
 			changeItemQuantityById,
+			clearCart,
 		]
 	)
 

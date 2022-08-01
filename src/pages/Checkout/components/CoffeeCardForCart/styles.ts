@@ -28,17 +28,15 @@ export const Info = styled.div`
 `
 
 export const Details = styled.div`
-	${({ theme }) => css`
-		padding: 2px 0;
-		display: grid;
-		grid-template-columns: repeat(2, max-content);
-		grid-template-rows: auto 32px;
-		gap: 0 8px;
+	padding: 2px 0;
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	grid-template-rows: auto 32px;
+	gap: 0 8px;
 
-		strong {
-			grid-column: 1 / 3;
-		}
-	`}
+	strong {
+		grid-column: 1 / 3;
+	}
 `
 
 export const RemoveButton = styled.button`

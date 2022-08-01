@@ -13,7 +13,7 @@ import { CoffeeCardForCart } from './components/CoffeeCardForCart'
 import * as Styled from './styles'
 
 export function Checkout() {
-	const { cartItems, totalPrice } = useCart()
+	const { coffees, totalPrice } = useCart()
 
 	const freight = 3.5
 
@@ -98,10 +98,10 @@ export function Checkout() {
 						Cafés selecionados
 					</Title>
 					<Styled.CheckoutCard>
-						{cartItems.length > 0 && (
+						{coffees?.length > 0 && (
 							<div>
-								{cartItems.map((cartItem) => (
-									<CoffeeCardForCart key={cartItem.id} coffee={cartItem} />
+								{coffees.map((coffee) => (
+									<CoffeeCardForCart key={coffee.id} coffee={coffee} />
 								))}
 							</div>
 						)}
