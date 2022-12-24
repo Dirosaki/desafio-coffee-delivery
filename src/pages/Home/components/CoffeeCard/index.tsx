@@ -17,7 +17,7 @@ export type CoffeeProps = {
 	name: string
 	description: string
 	price: number
-	quantity?: number
+	quantity: number
 }
 
 type CoffeeCardProps = {
