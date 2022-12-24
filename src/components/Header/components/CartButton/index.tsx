@@ -4,7 +4,7 @@ import { useCart } from 'hooks/useCart'
 
 import * as Styled from './styles'
 
-export function CartButton() {
+export const CartButton = () => {
 	const { quantityItems } = useCart()
 
 	return (

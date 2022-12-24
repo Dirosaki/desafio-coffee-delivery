@@ -49,7 +49,7 @@ function getStoredState() {
 	return []
 }
 
-export function CartContextProvider({ children }: CartContextProviderProps) {
+export const CartContextProvider = ({ children }: CartContextProviderProps) => {
 	const [coffees, dispatch] = useReducer(
 		coffeesReducer,
 		initialState,

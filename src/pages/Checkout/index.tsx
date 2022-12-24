@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 
 import { useCart } from 'hooks/useCart'
 
@@ -9,11 +14,16 @@ import { Text, Title } from 'components/Typography'
 import { formatPrice } from 'utils/formatPrice'
 
 import { CoffeeCardForCart } from './components/CoffeeCardForCart'
+import { CheckoutFormProps, checkoutFormValidationSchema } from './form'
 
 import * as Styled from './styles'
 
-export function Checkout() {
-	const { coffees, totalPrice } = useCart()
+export const Checkout = () => {
+	const { coffees, totalPrice, clearCart } = useCart()
+	const { handleSubmit, register } = useForm<CheckoutFormProps>({
+		resolver: zodResolver(checkoutFormValidationSchema),
+	})
+	const navigate = useNavigate()
 
 	const freight = 3.5
 
@@ -21,9 +31,15 @@ export function Checkout() {
 	const formattedTotalItems = formatPrice(totalPrice)
 	const formattedTotalOrder = formatPrice(totalPrice + freight)
 
+	const handleSubmitForm = (data: CheckoutFormProps) => {
+		navigate(`/pedido-confirmado/${uuidv4()}`, { state: data })
+
+		clearCart()
+	}
+
 	return (
 		<Styled.Container>
-			<form action="">
+			<form onSubmit={handleSubmit(handleSubmitForm)} noValidate>
 				<Styled.PersonalDataForm>
 					<Title size="xs" color="subtitle" weight={700} as="strong">
 						Complete seu pedido
@@ -42,33 +58,18 @@ export function Checkout() {
 							</div>
 						</header>
 						<Styled.Fields>
-							<Input name="CEP" placeholder="CEP" required data-name="CEP" />
-							<Input name="Rua" placeholder="Rua" required data-name="Rua" />
+							<Input placeholder="CEP" {...register('zipCode')} required />
+							<Input placeholder="Rua" {...register('street')} required />
 							<Input
-								name="Número"
 								placeholder="Número"
+								{...register('number')}
 								required
-								data-name="Número"
 								datatype="Diego"
 							/>
-							<Input
-								name="Complemento"
-								placeholder="Complemento"
-								data-name="Complemento"
-							/>
-							<Input
-								name="Bairro"
-								placeholder="Bairro"
-								required
-								data-name="Bairro"
-							/>
-							<Input
-								name="Cidade"
-								placeholder="Cidade"
-								required
-								data-name="Cidade"
-							/>
-							<Input name="UF" placeholder="UF" required data-name="UF" />
+							<Input placeholder="Complemento" {...register('complement')} />
+							<Input placeholder="Bairro" {...register('district')} required />
+							<Input placeholder="Cidade" {...register('city')} required />
+							<Input placeholder="UF" {...register('state')} required />
 						</Styled.Fields>
 					</Styled.AddressData>
 
@@ -86,9 +87,21 @@ export function Checkout() {
 							</div>
 						</header>
 						<Styled.PaymentMethodFields>
-							<PaymentMethodField id="credit-card" />
-							<PaymentMethodField id="debit-card" />
-							<PaymentMethodField id="money" />
+							<PaymentMethodField
+								id="credit-card"
+								value="credit-card"
+								{...register('paymentMethod')}
+							/>
+							<PaymentMethodField
+								id="debit-card"
+								value="debit-card"
+								{...register('paymentMethod')}
+							/>
+							<PaymentMethodField
+								id="money"
+								value="money"
+								{...register('paymentMethod')}
+							/>
 						</Styled.PaymentMethodFields>
 					</Styled.PaymentMethodContainer>
 				</Styled.PersonalDataForm>
@@ -121,7 +134,7 @@ export function Checkout() {
 								R$ {formattedTotalOrder}
 							</Text>
 						</Styled.TotalPriceContainer>
-						<Styled.ConfirmOrderButton>
+						<Styled.ConfirmOrderButton type="submit">
 							Confirmar pedido
 						</Styled.ConfirmOrderButton>
 					</Styled.CheckoutCard>

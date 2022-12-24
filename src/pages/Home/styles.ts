@@ -13,4 +13,16 @@ export const Container = styled.main`
 		z-index: -1;
 		filter: blur(70px);
 	}
+
+	@media (max-width: 900px) {
+		padding: 0 4rem;
+	}
+
+	@media (max-width: 714px) {
+		padding: 0 3rem;
+	}
+
+	@media (max-width: 656px) {
+		padding: 0 2rem;
+	}
 `

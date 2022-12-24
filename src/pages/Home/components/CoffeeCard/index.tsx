@@ -24,7 +24,7 @@ type CoffeeCardProps = {
 	coffee: CoffeeProps
 }
 
-export function CoffeeCard({ coffee }: CoffeeCardProps) {
+export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
 	const [quantityCoffee, setQuantityCoffee] = useState(1)
 
 	const { addCoffeeToCart } = useCart()
@@ -43,7 +43,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 		setQuantityCoffee(quantity)
 	}
 
-	function handleAddCoffeeToCart() {
+	const handleAddCoffeeToCart = () => {
 		addCoffeeToCart({ ...coffee, quantity: quantityCoffee })
 	}
 

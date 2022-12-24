@@ -25,6 +25,12 @@ export const Info = styled.div`
 	img {
 		height: 64px;
 	}
+
+	@media (max-width: 460px) {
+		img {
+			display: none;
+		}
+	}
 `
 
 export const Details = styled.div`
@@ -36,6 +42,7 @@ export const Details = styled.div`
 
 	strong {
 		grid-column: 1 / 3;
+		height: 1.75rem;
 	}
 `
 

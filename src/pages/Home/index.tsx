@@ -5,7 +5,7 @@ import { HeroSection } from './components/HeroSection'
 
 import * as Styled from './styles'
 
-export function Home() {
+export const Home = () => {
 	return (
 		<Styled.Container>
 			<img src={heroSectionImg} alt="" />

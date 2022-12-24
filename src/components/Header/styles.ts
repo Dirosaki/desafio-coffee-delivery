@@ -20,6 +20,22 @@ export const Header = styled.header`
 				line-height: 0;
 			}
 		}
+
+		@media (max-width: 900px) {
+			padding: 2rem 4rem;
+		}
+
+		@media (max-width: 714px) {
+			padding: 2rem 3rem;
+		}
+
+		@media (max-width: 656px) {
+			padding: 2rem;
+		}
+
+		@media (max-width: 626px) {
+			padding: 2rem 1.5rem;
+		}
 	`}
 `
 

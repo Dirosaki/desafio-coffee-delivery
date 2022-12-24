@@ -6,7 +6,7 @@ import { coffees } from 'data/coffees'
 
 import * as Styled from './styles'
 
-export function CoffeeSection() {
+export const CoffeeSection = () => {
 	return (
 		<Styled.CoffeeSection>
 			<Title size="l" color="subtitle" as="strong">

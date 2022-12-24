@@ -16,12 +16,12 @@ type NumberInputProps = {
 	onQuantityCoffeeReceived: (quantity: number) => void
 }
 
-export function NumberInput({
+export const NumberInput = ({
 	quantityCoffee,
 	onIncreaseQuantityCoffee,
 	onDecreaseQuantityCoffee,
 	onQuantityCoffeeReceived,
-}: NumberInputProps) {
+}: NumberInputProps) => {
 	const handleKeys: HandleKeys = {
 		ArrowUp: () => onIncreaseQuantityCoffee(),
 		ArrowDown: () => onDecreaseQuantityCoffee(),

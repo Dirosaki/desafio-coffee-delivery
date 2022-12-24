@@ -5,11 +5,11 @@ import { Text, Title } from 'components/Typography'
 
 export const Card = styled.div`
 	${({ theme }) => css`
-		padding: 20px 24px;
-		width: 256px;
+		padding: 1.25rem 1.5rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: space-between;
 		background: ${theme.colors.base.card};
 		border-radius: 6px 36px;
 	`}
@@ -83,6 +83,7 @@ export const ActionWrapper = styled.div`
 
 	input {
 		width: 100%;
+		min-width: 18px;
 	}
 `
 

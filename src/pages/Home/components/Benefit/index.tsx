@@ -8,7 +8,7 @@ type BenefitProps = {
 	backgroundIcon: string
 }
 
-export function Benefit({ icon, text, backgroundIcon }: BenefitProps) {
+export const Benefit = ({ icon, text, backgroundIcon }: BenefitProps) => {
 	return (
 		<Styled.Benefit backgroundIcon={backgroundIcon}>
 			<span>{icon}</span>

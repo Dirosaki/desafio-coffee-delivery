@@ -22,7 +22,7 @@ type ResponseData = {
 	principalSubdivision: string
 }
 
-export function Header() {
+export const Header = () => {
 	const [myLocation, setMyLocation] = useState('Minha localização')
 
 	const hasGeolocationInNavigator = 'geolocation' in navigator
@@ -60,7 +60,7 @@ export function Header() {
 				<Link to="/" tabIndex={-1}>
 					<img
 						src={logoImg}
-						alt="Copo de café roxo com um foguete dentro e ao lado escrito 'Coffe Delivery'"
+						alt="Copo de café roxo com um foguete dentro e ao lado escrito 'Coffee Delivery'"
 					/>
 				</Link>
 				<Styled.ActionsWrapper>

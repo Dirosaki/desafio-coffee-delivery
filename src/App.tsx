@@ -9,7 +9,7 @@ import { defaultTheme } from 'styles/themes/default'
 
 import { Router } from './Router'
 
-export function App() {
+export const App = () => {
 	return (
 		<ThemeProvider theme={defaultTheme}>
 			<CartContextProvider>

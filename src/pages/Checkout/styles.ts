@@ -1,13 +1,36 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.main`
-	margin: 2.5rem auto;
-	width: 100%;
-	max-width: 1120px;
+	margin: 2.5rem 0;
+	padding: 0 1.5rem;
 
 	form {
+		margin: 0 auto;
+		max-width: 1120px;
 		display: flex;
 		gap: 2rem;
+	}
+
+	@media (max-width: 1150px) {
+		form {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 900px) {
+		padding: 0 4rem;
+	}
+
+	@media (max-width: 714px) {
+		padding: 0 3rem;
+	}
+
+	@media (max-width: 656px) {
+		padding: 0 2rem;
+	}
+
+	@media (max-width: 626px) {
+		padding: 0 1.5rem;
 	}
 `
 
@@ -35,6 +58,10 @@ const BaseFormCard = styled.div`
 		strong + & {
 			margin-top: 1rem;
 		}
+
+		@media (max-width: 600px) {
+			padding: 2.5rem 2rem;
+		}
 	`}
 `
 
@@ -46,7 +73,7 @@ export const AddressData = styled(BaseFormCard)`
 
 export const Fields = styled.div`
 	display: grid;
-	grid-template-columns: 12.5rem 17.25rem 3.75rem;
+	grid-template-columns: minmax(10rem, 12.5rem) minmax(14rem, 17.25rem) 3.75rem;
 	gap: 16px 12px;
 
 	div:nth-child(2) {
@@ -55,6 +82,22 @@ export const Fields = styled.div`
 
 	div:nth-child(4) {
 		grid-column: 2 / 4;
+	}
+
+	@media (max-width: 1150px) {
+		grid-template-columns: 1fr;
+
+		div {
+			grid-column: auto;
+		}
+
+		div:nth-child(2) {
+			grid-column: auto;
+		}
+
+		div:nth-child(4) {
+			grid-column: auto;
+		}
 	}
 `
 
@@ -66,33 +109,35 @@ export const PaymentMethodContainer = styled(BaseFormCard)`
 `
 
 export const PaymentMethodFields = styled.div`
-	${({ theme }) => css`
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 12px;
-	`}
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+
+	@media (max-width: 800px) {
+		grid-template-columns: 1fr;
+	}
 `
 
 export const CheckoutContainer = styled.aside`
 	width: 448px;
+
+	@media (max-width: 1150px) {
+		width: auto;
+	}
 `
 
 export const CheckoutCard = styled(BaseFormCard)`
-	${({ theme }) => css`
-		border-radius: 0.375rem 2.75rem;
-	`}
+	border-radius: 0.375rem 2.75rem;
 `
 
 export const TotalPriceContainer = styled.div`
-	${({ theme }) => css`
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		row-gap: 12px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	row-gap: 12px;
 
-		p:nth-child(even) {
-			text-align: end;
-		}
-	`}
+	p:nth-child(even) {
+		text-align: end;
+	}
 `
 
 export const ConfirmOrderButton = styled.button`

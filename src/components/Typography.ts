@@ -25,7 +25,6 @@ export const Title = styled.h1<TitleProps>`
 export const Text = styled.h1<TextProps>`
 	${({ theme, size = 'm', color = 'text', weight = 400 }) => css`
 		font-family: 'Roboto', sans-serif;
-
 		font-size: ${theme.fontSize.text[size]};
 		font-weight: ${weight};
 		line-height: 1.3;

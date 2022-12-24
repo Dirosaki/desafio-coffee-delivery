@@ -15,7 +15,7 @@ type CoffeeCardForCartProps = {
 	coffee: CoffeeProps
 }
 
-export function CoffeeCardForCart({ coffee }: CoffeeCardForCartProps) {
+export const CoffeeCardForCart = ({ coffee }: CoffeeCardForCartProps) => {
 	const {
 		removeItemById,
 		increaseItemQuantityById,
